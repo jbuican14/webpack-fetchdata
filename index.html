@@ -6,8 +6,16 @@
     <link rel="stylesheet" href="style.css"> 
     <title>Developer test 2020</title>
     <script>
-    
+      //define a global scope
+      let pageObj ;
+    NYTD ={
+      render_section_front: function(data) {
+        pageObj = data;
+        console.log(pageObj); 
+        }
+      }      
       </script>
+      <script src="http://np-ec2-nytimes-com.s3.amazonaws.com/dev/test/nyregion.js"></script>
   </head>
   <body>    <!-- modal box -->
 <input type="checkbox" id="show-hide-articles" hidden />

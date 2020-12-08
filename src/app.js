@@ -15,40 +15,9 @@ const posts = {
 let data = null;
 const articles = [];
 
-const useHTTPReq = (url, callback) => {
-  // Create script with url and callback (if specified)
-  var ref = window.document.getElementsByTagName('script')[0];
-  var script = window.document.createElement('script');
-  script.src =
-    url + (url.indexOf('?') + 1 ? '&' : '?') + 'callback=' + callback;
-
-  // Insert script tag into the DOM (append to <head>)
-  ref.parentNode.insertBefore(script, ref);
-
-  // After the script is loaded (and executed), remove it
-  script.onload = function () {
-    this.remove();
-  };
-};
-
-var logAPI = function (data) {
-  console.log(data);
-};
-
 const init = () => {
-  console.log('ready');
-  const url = 'http://np-ec2-nytimes-com.s3.amazonaws.com/dev/test/nyregion.js'; // site that doesn’t send Access-Control-*
-  fetch(url)
-    .then((response) => response.json())
-    .then((json) => {
-      data = json.content;
-      buildArticles();
-    })
-    .catch(() => {
-      console.log('Can’t access ' + url + ' response. Blocked by browser?');
-      useHTTPReq();
-      loadBackupData();
-    });
+  console.log('ready', pageObj);
+  buildArticles();
 
   prev.addEventListener('click', handleArticleNavigation);
   next.addEventListener('click', handleArticleNavigation);
@@ -73,11 +42,11 @@ const handleLanguageToggle = (e) => {
   renderArticles();
 };
 
-const renderArticles = (page) => {
-  console.log(posts.isEnglish);
+const renderArticles = (pg) => {
+  console.log(pg, pageObj.page);
   let header = document.createElement('div');
 
-  page ? page : posts.currentPg;
+  pg ? pg : posts.currentPg;
   output.innerHTML = '';
   if (!posts.isEnglish) {
     // updateLang();
@@ -91,7 +60,7 @@ const renderArticles = (page) => {
   posts.tolPage = Math.ceil(articles.length / posts.postPerPg);
   pagination.innerHTML = `<h2>${posts.currentPg} of ${posts.tolPage}  </h2>`;
 
-  header.innerHTML = `<h1>${data.page.parameters.title}</h1> <hr/>`;
+  header.innerHTML = `<h1>${pageObj.page.parameters.title}</h1> <hr/>`;
   output.appendChild(header);
 
   for (let i = startPost; i < endPost; i++) {
@@ -127,21 +96,8 @@ const isArticle = (data) => {
     : false;
 };
 
-const loadBackupData = () => {
-  fetch('./src/backup.json')
-    .then((response) => response.json())
-    .then((json) => {
-      data = json;
-      buildArticles();
-    })
-    .catch(() => {
-      console.log('backup data is not available');
-      //display static image
-    });
-};
-
-const buildArticles = () => {
-  let contents = data.page.content;
+const buildArticles = (page) => {
+  let contents = pageObj.page.content;
 
   for (let content in contents) {
     // 1 to 5
@@ -189,10 +145,6 @@ const updateLang = (lang) => {
 };
 
 window.addEventListener('load', (event) => {
-  console.log('page is fully loaded');
-  // init();
-  useHTTPReq(
-    'http://np-ec2-nytimes-com.s3.amazonaws.com/dev/test/nyregion.js?format=json',
-    'logAPI'
-  );
+  console.log('page is fully loaded', pageObj);
+  init();
 });
