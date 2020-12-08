@@ -3,13 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css"> 
     <title>Developer test 2020</title>
+    <script>
+    
+      </script>
   </head>
-  <body>
-    <div class="container">
-      <div class="loading">Loading ...</div>
-      <div class="pages"></div>
-    </div>
-    <script src="./public/bundle.js"></script>
+  <body>    <!-- modal box -->
+<input type="checkbox" id="show-hide-articles" hidden />
+<div class="articles-wrapper">
+  <input type="checkbox" id="show-form" hidden />
+  <div class="show-btns-wrapper">
+    <label for="show-form" class="show-article-btn show-english-form" id="english-lang">English</label>
+    <label for="show-form" class="show-article-btn show-martian-form" id="martian-lang">Martian</label>
+  </div>
+
+  <div class="english">Loading ...</div>
+  <div class="martian">Loading ...</div>
+</div>
+<!-- end of modal box -->
+<div class="pages"></div><div class="navigation"><span id="left">&lt; </span> &nbsp; <span id="right">&gt; </span> </div>
+   </div>
+    <!-- <script src="./public/bundle.js"></script> -->
+    <script src="./src/app.js"></script>
   </body>
 </html>

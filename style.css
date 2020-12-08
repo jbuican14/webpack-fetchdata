@@ -1,0 +1,85 @@
+/* 10/16 = 0.625 * 100 = 62.5% */
+/* FONTS */
+/* COLOR */
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.6rem;
+}
+
+.show-btns-wrapper {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.show-article-btn {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 50%;
+          flex: 0 1 50%;
+  background-color: #aaaaaa;
+  color: black;
+  cursor: pointer;
+  padding: 1rem;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  border: 0.1rem solid #fcb332;
+}
+
+.martian {
+  display: none;
+}
+
+.show-english-form {
+  color: white;
+  background-color: #384260;
+  pointer-events: none;
+}
+
+#show-form:checked ~ .show-btns-wrapper .show-martian-form {
+  color: white;
+  background-color: #384260;
+  pointer-events: none;
+}
+
+#show-form:checked ~ .show-btns-wrapper .show-english-form {
+  color: #384260;
+  background-color: #aaaaaa;
+  pointer-events: initial;
+}
+
+#show-form:checked ~ .english {
+  display: block;
+}
+
+#show-form:checked ~ .martian {
+  display: none;
+}
+
+#show-hide-articles:checked ~ .articles-wrapper {
+  display: block;
+}
+
+#show-hide-articles:checked ~ .container {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* end of Modal Box */
+/*pagination*/
+#left,
+#right {
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
